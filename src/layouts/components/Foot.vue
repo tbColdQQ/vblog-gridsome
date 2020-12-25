@@ -5,10 +5,10 @@
     <el-row>
       <el-col :span="10">
         <div>
-          © 2018 tbcoldQQ&emsp;&emsp;
-          <a href="https://github.com/tbcoldQQ" target="_blank">Profile</a
+          © 2018 tbColdQQ&emsp;&emsp;
+          <a href="https://github.com/tbColdQQ" target="_blank">Profile</a
           >&emsp;&emsp;
-          <a href="https://github.com/tbcoldQQ/vblog" target="_blank"
+          <a href="https://github.com/tbColdQQ/vblog" target="_blank"
             >VBlog</a
           >
         </div>

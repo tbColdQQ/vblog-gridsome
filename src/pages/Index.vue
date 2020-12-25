@@ -1,6 +1,9 @@
 <template>
   <Layout>
-    <div class="title">{{$page.list.edges[0].node.title}}</div>
+    <h2 class="title">{{$page.list.edges[0].node.title}}</h2>
+    <div>发布时间: {{$page.list.edges[0].node.published_at}}</div>
+    <div>更新时间: {{$page.list.edges[0].node.updated_at}}</div>
+    <el-divider></el-divider>
     <div v-html="mdToHtml($page.list.edges[0].node.content)"></div>
   </Layout>
 </template>
@@ -13,6 +16,8 @@
           id,
           title,
           content,
+          published_at,
+          updated_at,
           categories {
             id,
             name,

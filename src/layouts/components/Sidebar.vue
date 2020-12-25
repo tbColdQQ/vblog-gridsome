@@ -118,7 +118,7 @@ export default {
   mounted() {
     let arr = this.$route.path.split("/")
     this.active = "/" + arr[1]
-    console.log('arr--->', arr)
+    // console.log('arr--->', arr)
   }
 };
 </script>

@@ -5,12 +5,42 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
-// const axios = require('axios')
+const axios = require('axios')
 const baseURL = "http://qm.tbcold.com:1337"
 
 module.exports = function (api) {
   api.loadSource(async ({ addCollection }) => {
     // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
+    const followers = addCollection('Follower')
+    const followings = addCollection('Following')
+    const repos = addCollection('Repo')
+
+    const followerData = await axios.get('https://api.github.com/users/tbColdQQ/followers')
+    console.log('followerData--->', followerData.data)
+
+    const followingData = await axios.get('https://api.github.com/users/tbColdQQ/following')
+    console.log('followingData--->', followingData.data)
+
+    const repoData = await axios.get('https://api.github.com/users/tbColdQQ/repos')
+    console.log('repoData--->', repoData.data)
+
+    followerData.data.forEach(item => {
+      followers.addNode(item)
+    })
+
+    followingData.data.forEach(item => {
+      followings.addNode(item)
+    })
+
+    repoData.data.forEach(item => {
+      repos.addNode(item)
+    })
+
+    const userBaseInfoData = await axios.get('https://api.github.com/users/tbColdQQ')
+    console.log('userBaseInfoData--->', userBaseInfoData.data)
+
+    const adminUser = addCollection('Author')
+    adminUser.addNode(userBaseInfoData.data)
     
   })
 

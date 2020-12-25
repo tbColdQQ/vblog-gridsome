@@ -37,8 +37,8 @@
       </div>
       <h1 class="project-name">nj的VBlog</h1>
       <h2 class="project-tagline">个人博客</h2>
-      <a :href="'https://github.com/tbcoldQQ'" class="btn" target="_blank">GitHub主页</a>
-      <!-- <a href="https://github.com/tbcoldQQ/vblog" class="btn" target="_blank" v-if="!mini">博客源码</a> -->
+      <a :href="'https://github.com/tbColdQQ'" class="btn" target="_blank">GitHub主页</a>
+      <!-- <a href="https://github.com/tbColdQQ/vblog" class="btn" target="_blank" v-if="!mini">博客源码</a> -->
     </section>
     <div
       style="
@@ -143,7 +143,7 @@
           </el-col>
           <el-col :span="4" style="text-align: right">
             <div style="font-size: 20px; color: #606266; margin-top: 5px">
-              <b>tbcoldQQ</b>
+              <b>tbColdQQ</b>
             </div>
             <div style="color: #606266">
               <i class="el-icon-location"></i>&nbsp;{{
@@ -168,7 +168,7 @@
             <el-popover
               ref="bigAvatar"
               placement="top-start"
-              title="tbcoldQQ"
+              title="tbColdQQ"
               width="200"
               trigger="hover"
             >
@@ -230,7 +230,7 @@ export default {
       },
       audioAutoPlay: false,
       location: 'Beijing',
-      name: 'tbcoldQQ',
+      name: 'tbColdQQ',
       avatarUrl: 'https://portrait.gitee.com/uploads/avatars/user/283/849677_tbCold_1608867075.png!avatar60',
       // audioUrl: 'http://qm.tbcold.com/music.m4a'
       audioUrl: ''
@@ -252,7 +252,7 @@ export default {
       this.topbar.active = this.topbar.active == "" ? " " : ""
       switch (index) {
         case "#githubHome":
-          window.open('https://github.com/tbcoldQQ')
+          window.open('https://github.com/tbColdQQ')
           break
         case "#blog":
           if (this.blog) {
