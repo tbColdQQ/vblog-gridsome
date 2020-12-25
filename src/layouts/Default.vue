@@ -188,7 +188,8 @@
           <sidebar></sidebar>
         </el-col>
         <el-col :span="18" style="padding-left: 10px">
-          <app-main></app-main>
+          <!-- <app-main></app-main> -->
+          <slot></slot>
         </el-col>
       </el-row>
     </section>
@@ -208,12 +209,10 @@ query {
 
 <script>
 import Sidebar from './components/Sidebar'
-import AppMain from './components/AppMain'
 import Foot from './components/Foot'
 export default {
   components: {
     Sidebar,
-    AppMain,
     Foot
   },
   data() {
@@ -232,8 +231,9 @@ export default {
       audioAutoPlay: false,
       location: 'Beijing',
       name: 'tbcoldQQ',
-      avatarUrl: 'https://avatars3.githubusercontent.com/u/13831069?s=60&v=4',
-      audioUrl: 'https://isure.stream.qqmusic.qq.com/C400004Fimy419PpsA.m4a?guid=751279986&vkey=8372059AD06EC05094977FF9B209D3684C473EB8FC9FD8CD4D9818F53FE010AB5D05BC75F36590E3D65A562E5EBC0252CAD23E189850E773&uin=3046&fromtag=66'
+      avatarUrl: 'https://portrait.gitee.com/uploads/avatars/user/283/849677_tbCold_1608867075.png!avatar60',
+      // audioUrl: 'http://qm.tbcold.com/music.m4a'
+      audioUrl: ''
     }
   },
   mounted() {
@@ -319,6 +319,10 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0;
+  padding: 0;
+}
 .page-header {
         padding: 5rem 6rem;
         color: #fff;

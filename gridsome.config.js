@@ -13,7 +13,7 @@ module.exports = {
       options: {
         apiURL: 'http://qm.tbcold.com:1337',
         queryLimit: 1000, // Defaults to 100
-        contentTypes: ['category'],
+        contentTypes: ['category', 'blog'],
         // singleTypes: ['impressum'],
         // Possibility to login with a Strapi user,
         // when content types are not publicly available (optional).

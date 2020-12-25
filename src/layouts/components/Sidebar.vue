@@ -19,7 +19,7 @@
       </el-menu>
     </el-card>
 
-    <el-card shadow="never" style="margin-top: 20px;text-align: center">
+    <el-card shadow="never" style="margin-top: 20px;text-align: center;display: none;">
       <div
         v-if="!token"
         style="font-size: 0.9rem;line-height: 1.5;color: #606c71;"
@@ -51,6 +51,10 @@
 </template>
 
 <script>
+import IndexPage from '~/pages/Index.vue'
+import CyclePage from '~/pages/Cycle.vue'
+import ListPage from '~/pages/List.vue'
+import ProjectPage from '~/pages/Project.vue'
 export default {
   data() {
     return {
@@ -61,7 +65,7 @@ export default {
 				{
 					path: '/',
 					redirect: '/',
-					component: null,
+					component: IndexPage,
 					meta: {
 						type: "user",
 						icon: 'el-icon-star-off',
@@ -72,7 +76,7 @@ export default {
 				{
 					path: '/cycle',
 					redirect: '/cycle',
-					component: null,
+					component: CyclePage,
 					meta: {
 						type: "user",
 						icon: 'el-icon-mobile-phone',
@@ -83,7 +87,7 @@ export default {
 				{
 					path: '/list',
 					redirect: '/list',
-					component: null,
+					component: ListPage,
 					meta: {
 						type: "user",
 						icon: 'el-icon-edit-outline',
@@ -92,9 +96,9 @@ export default {
 					children: []
 				},
 				{
-					path: '/projects',
-					redirect: '/projects',
-					component: null,
+					path: '/project',
+					redirect: '/project',
+					component: ProjectPage,
 					meta: {
 						type: "user",
 						icon: 'el-icon-service',
@@ -110,7 +114,12 @@ export default {
 			console.log(this.constantRouterMap, index)
 			window.location.href = index
 		}
-	}
+  },
+  mounted() {
+    let arr = this.$route.path.split("/")
+    this.active = "/" + arr[1]
+    console.log('arr--->', arr)
+  }
 };
 </script>
 
