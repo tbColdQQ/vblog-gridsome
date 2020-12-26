@@ -37,7 +37,7 @@
       </div>
       <h1 class="project-name">nj的VBlog</h1>
       <h2 class="project-tagline">个人博客</h2>
-      <a :href="'https://github.com/tbColdQQ'" class="btn" target="_blank">GitHub主页</a>
+      <a :href="$page.allAuthor.edges[0].node.html_url" class="btn" target="_blank">GitHub主页</a>
       <!-- <a href="https://github.com/tbColdQQ/vblog" class="btn" target="_blank" v-if="!mini">博客源码</a> -->
     </section>
     <div
@@ -143,7 +143,7 @@
           </el-col>
           <el-col :span="4" style="text-align: right">
             <div style="font-size: 20px; color: #606266; margin-top: 5px">
-              <b>tbColdQQ</b>
+              <b>{{$page.allAuthor.edges[0].node.login}}</b>
             </div>
             <div style="color: #606266">
               <i class="el-icon-location"></i>&nbsp;{{
@@ -168,7 +168,7 @@
             <el-popover
               ref="bigAvatar"
               placement="top-start"
-              title="tbColdQQ"
+              :title="$page.allAuthor.edges[0].node.login"
               width="200"
               trigger="hover"
             >
@@ -237,6 +237,10 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$page)
+    this.name = this.$page.allAuthor.edges[0].node.login
+    this.location = this.$page.allAuthor.edges[0].node.location
+    this.avatarUrl = this.$page.allAuthor.edges[0].node.avatar_url
     this.$nextTick(() => {
         setInterval(this.listenMusic, 1000)
     })

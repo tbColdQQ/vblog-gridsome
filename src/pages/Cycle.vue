@@ -4,7 +4,7 @@
       shadow="never"
       style="min-height: 400px; margin-bottom: 20px; padding: 0px 0px 20px 0px"
     >
-      <el-tabs v-model="activeTab" type="card" @tab-click="onSelect">
+      <el-tabs v-model="activeTab" type="card">
         <el-tab-pane
           :label="'粉丝 ' + followersTotal"
           name="followers"
@@ -25,21 +25,21 @@
                   >
                     <i class="el-icon-star-off"></i>&emsp;
                     <a
-                      @click="$router.push(`/user/social/details/${item.name}`)"
+                      @click="geDetail(item.node.login)"
                       style="text-decoration: none; cursor: pointer"
-                      >{{ item.name }}</a
+                      >{{ item.node.login }}</a
                     >
                     <br />
                     <i class="el-icon-message"></i>&emsp;
                     <a
-                      :href="item.htmlUrl"
+                      :href="item.node.html_url"
                       target="_blank"
                       style="text-decoration: none; cursor: pointer"
                       >TA的主页</a
                     >
                     <br />
                     <img
-                      :src="item.avatarUrl"
+                      :src="item.node.avatar_url"
                       style="width: 100%; border-radius: 5px; margin-top: 5px"
                     />
                   </el-card>
@@ -52,7 +52,7 @@
                   layout="prev, pager, next"
                   :current-page.sync="followers.query.page"
                   :page-size="followers.query.pageSize"
-                  :total="followers.query.pageNumber * followers.query.pageSize"
+                  :total="followersTotal"
                 >
                 </el-pagination>
               </div>
@@ -92,21 +92,21 @@
                   >
                     <i class="el-icon-star-off"></i>&emsp;
                     <a
-                      @click="$router.push(`/user/social/details/${item.name}`)"
+                      @click="goDetail(item.node.login)"
                       style="text-decoration: none; cursor: pointer"
-                      >{{ item.name }}</a
+                      >{{ item.node.login }}</a
                     >
                     <br />
                     <i class="el-icon-message"></i>&emsp;
                     <a
-                      :href="item.htmlUrl"
+                      :href="item.node.html_url"
                       target="_blank"
                       style="text-decoration: none; cursor: pointer"
                       >TA的主页</a
                     >
                     <br />
                     <img
-                      :src="item.avatarUrl"
+                      :src="item.node.avatar_url"
                       style="width: 100%; border-radius: 5px; margin-top: 5px"
                     />
                   </el-card>
@@ -119,7 +119,7 @@
                   layout="prev, pager, next"
                   :current-page.sync="following.query.page"
                   :page-size="following.query.pageSize"
-                  :total="following.query.pageNumber * following.query.pageSize"
+                  :total="followingTotal"
                 >
                 </el-pagination>
               </div>
@@ -143,7 +143,42 @@
     </el-card>
   </Layout>
 </template>
-
+<page-query>
+query {
+  allAuthor {
+    edges {
+      node {
+        avatar_url,
+        login,
+        html_url,
+        public_repos,
+        followers,
+        following
+      }
+    }
+  },
+  allFollower (page: 1, perPage: 5, sortBy: "id", order: DESC) {
+    edges {
+      node {
+        id,
+        login,
+        avatar_url,
+        html_url
+      }
+    }
+  },
+  allFollowing (page: 1, perPage: 5, sortBy: "id", order: DESC) {
+    edges {
+      node {
+        id,
+        login,
+        avatar_url,
+        html_url
+      }
+    }
+  }
+}
+</page-query>
 <script>
 export default {
   name: 'CyclePage',
@@ -173,15 +208,37 @@ export default {
       followingTotal: 0
     }
   },
+  mounted() {
+    this.followersTotal = this.$page.allAuthor.edges[0].node.followers
+    this.followingTotal = this.$page.allAuthor.edges[0].node.following
+    this.gethubUsername = this.$page.allAuthor.edges[0].node.login
+    if(this.$page.allAuthor.edges[0].node.followers > 0) {
+      this.followers.list = this.$page.allFollower.edges
+    }
+    if(this.$page.allAuthor.edges[0].node.following > 0) {
+      this.following.list = this.$page.allFollowing.edges
+    }
+  },
   methods: {
-    onSelect() {
-
+    goDetail(name) {
+      window.location.href = `/author/${name}`
     },
-    listFollowers() {
-
-    },
-    listFollowing() {
-      
+    async onSelect() {
+      if(this.activeTab == 'followers') {
+        const data = await this.$axios.get('https://api.github.com/users/tbColdQQ/followers?per_page=9&page=' + this.followers.query.page)
+        let arr = []
+        data.data.forEach(item => {
+          arr.push({node: item})
+        })
+        this.followers.list = arr
+      }else {
+        const data = await this.$axios.get('https://api.github.com/users/tbColdQQ/following?per_page=9&page=' + this.following.query.page)
+        let arr = []
+        data.data.forEach(item => {
+          arr.push({node: item})
+        })
+        this.following.list = arr
+      }
     }
   }
 };

@@ -144,6 +144,18 @@
     },
     total: allStrapiBlog {
       totalCount
+    },
+    allAuthor {
+      edges {
+        node {
+          avatar_url,
+          login,
+          html_url,
+          public_repos,
+          followers,
+          following
+        }
+      }
     }
   }
 </page-query>

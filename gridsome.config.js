@@ -23,5 +23,19 @@ module.exports = {
         }
       }
     }
-  ]
+  ],
+  templates: {
+    StrapiBlog: [
+      {
+        path: '/blog/:id',
+        component: './src/templates/Blog.vue'
+      }
+    ],
+    Repo: [
+      {
+        path: '/repo/:id',
+        component: './src/templates/Repo.vue'
+      }
+    ]
+  }
 }
