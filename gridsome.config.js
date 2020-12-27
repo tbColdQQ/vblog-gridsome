@@ -7,6 +7,7 @@
 module.exports = {
   siteName: 'nj的VBlog',
   siteDescription: '个人博客',
+  // pathPrefix: '/vblog',
   plugins: [
     {
       use: '@gridsome/source-strapi',

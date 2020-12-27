@@ -221,7 +221,7 @@ export default {
   },
   methods: {
     goDetail(name) {
-      window.location.href = `/author/${name}`
+      window.location.href = `/author?name=${name}`
     },
     async onSelect() {
       if(this.activeTab == 'followers') {

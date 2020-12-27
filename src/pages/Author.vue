@@ -43,7 +43,7 @@
               </font>
               <font style="font-size: 14px;color:#606266;" v-if="blog">
                 <i class="el-icon-edit-outline"></i>&nbsp;&nbsp;
-                <a :href="$util.addHttp(blog)" target="_blank">{{ blog }}</a>
+                <!-- <a :href="$util.addHttp(blog)" target="_blank">{{ blog }}</a> -->
                 <br />
               </font>
             </div>
@@ -104,9 +104,10 @@ export default {
     };
   },
   async mounted() {
+    console.log('author name--->', this.$route.query.name)
     this.loading = true;
     const res = await this.$axios.get(
-      "https://api.github.com/users/" + this.$route.params.name
+      "https://api.github.com/users/" + this.$route.query.name
     );
     let result = res.data;
     this.name = result["name"];
